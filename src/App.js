@@ -1,11 +1,25 @@
-import React from "react";
-import "./styles.css";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router';
+import { ConnectedRouter } from 'connected-react-router';
 
-export default function App() {
+import configureStore, { history } from './store/storeConfig';
+import { DefaultLayout } from './layout';
+
+import './App.scss';
+
+const store = configureStore();
+
+function App() {
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route component={DefaultLayout} />
+        </Switch>
+      </ConnectedRouter>
+    </Provider>
   );
 }
+
+export default App;
